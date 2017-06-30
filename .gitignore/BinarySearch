@@ -1,0 +1,60 @@
+/* 二分探索・汎用版 */
+/* 
+* <参考サイト>
+* https://www.grapecity.com/tools/support/powernews/column/clang/054/page03.htm
+*/
+#include <stdio.h>
+
+// 最大値の初期値
+#define MAX_VAL 80000
+
+int BinarySearch();
+
+int main(void)
+{
+  // 最小値、中央値、最大値
+  int lowid, midid, highid;
+  // 探索値
+  int target;
+  // 判定用フラグ
+  int isfound = 0;
+  // 検索回数
+  int cnt = 0;
+  // ループカウンタ
+  int i;
+
+  cnt = 0;
+  printf("探索値を入力してください : ");
+  scanf("%d", &target);
+
+  highid = MAX_VAL;
+  lowid = 0;
+
+  while (lowid <= highid) {
+    cnt++;
+    // 中央値計算
+    midid = (lowid + highid) / 2;
+    // 最小値、中央値、最大値の変化を表示
+    printf("lowid=%d, midid=%d. highid=%d\n",lowid, midid, highid) ;
+    // 探索値と中央値が一致すればループを抜ける
+    if (midid == target) {
+      isfound = 1;
+      break;
+      // 値の大小を調べて探索範囲を狭める
+    } else if (midid < target) {
+      lowid = midid + 1;
+    } else {
+      highid = midid - 1;
+    }
+  }
+
+  if (isfound == 1) {
+    // 探索値が発見された
+    printf("値 %d は %d 回目に見つかりました。\n", target, cnt);
+    // return 0;
+  } else {
+    printf("値 %d は見つかりませんでした。\n", target);
+    // return 0;
+  }
+}
+  
